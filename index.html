@@ -1,0 +1,1058 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Z.O.L Team | Nhật Ký Tri Ân 20/10</title>
+    <!-- Tailwind CSS & Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,700;1,600&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      body {
+        font-family: "Comfortaa", cursive, sans-serif;
+        background: linear-gradient(
+          135deg,
+          #fce7f3 0%,
+          #fbcfe8 40%,
+          #fff1f2 70%,
+          #fef3c7 100%
+        );
+        color: #4c0519;
+        min-height: 100vh;
+        overflow-x: hidden;
+        transition: background 1s ease;
+      }
+
+      .font-serif-custom {
+        font-family: "Playfair Display", serif;
+      }
+      .font-handwriting {
+        font-family: "Dancing Script", cursive;
+      }
+
+      /* Thẻ Kính Mờ Pastel */
+      .luxe-card {
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 2px solid rgba(255, 255, 255, 0.85);
+        box-shadow:
+          0 20px 40px -10px rgba(244, 114, 182, 0.25),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      }
+
+      /* Trang Nhật Ký Có Gáy Sổ Lò Xò */
+      .journal-page {
+        background: rgba(255, 250, 245, 0.98);
+        border: 2px solid rgba(244, 114, 182, 0.35);
+        box-shadow: 0 25px 50px rgba(190, 24, 93, 0.2);
+        position: relative;
+        transform-style: preserve-3d;
+        transition:
+          transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.4s ease;
+      }
+
+      .journal-page::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 20px;
+        bottom: 20px;
+        width: 2px;
+        border-left: 2px dashed rgba(244, 114, 182, 0.45);
+        z-index: 10;
+      }
+
+      /* Lật trang 3D */
+      .page-flipping {
+        transform: rotateY(-90deg) scale(0.95);
+        opacity: 0;
+      }
+
+      /* Khung Dán Ảnh Polaroid Scrapbook */
+      .polaroid-frame {
+        background: #ffffff;
+        padding: 10px 10px 24px 10px;
+        box-shadow: 0 10px 25px rgba(244, 114, 182, 0.2);
+        transform: rotate(-2deg);
+        border: 1px solid #fbcfe8;
+        transition: transform 0.3s ease;
+      }
+      .polaroid-frame:hover {
+        transform: rotate(0deg) scale(1.03);
+      }
+
+      .tape-effect {
+        position: absolute;
+        top: -10px;
+        left: 32%;
+        width: 65px;
+        height: 20px;
+        background: rgba(251, 207, 232, 0.7);
+        backdrop-filter: blur(2px);
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        transform: rotate(-4deg);
+        z-index: 5;
+      }
+
+      .pink-gold-text {
+        background: linear-gradient(
+          135deg,
+          #be185d 0%,
+          #e11d48 50%,
+          #d97706 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .sweet-btn {
+        background: linear-gradient(
+          135deg,
+          #f43f5e 0%,
+          #fb7185 50%,
+          #f59e0b 100%
+        );
+        color: #ffffff;
+        box-shadow: 0 6px 20px rgba(244, 63, 94, 0.35);
+        font-weight: 700;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .sweet-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(244, 63, 94, 0.5);
+        background: linear-gradient(135deg, #e11d48 0%, #f43f5e 100%);
+      }
+
+      /* Nút Mở Sổ Tỏa Sáng Thu Hút */
+      @keyframes glowPulse {
+        0%,
+        100% {
+          box-shadow:
+            0 0 15px rgba(244, 63, 94, 0.4),
+            0 0 30px rgba(245, 158, 11, 0.2);
+          transform: scale(1);
+        }
+        50% {
+          box-shadow:
+            0 0 25px rgba(244, 63, 94, 0.7),
+            0 0 45px rgba(245, 158, 11, 0.5);
+          transform: scale(1.02);
+        }
+      }
+      .cta-btn-glow {
+        animation: glowPulse 2.5s infinite ease-in-out;
+      }
+
+      .message-content {
+        line-height: 1.85;
+        letter-spacing: 0.02em;
+        word-spacing: 0.04em;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      select {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23be185d' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        background-size: 1.1em;
+      }
+
+      @keyframes floatSlow {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-7px);
+        }
+      }
+      .float-anim {
+        animation: floatSlow 5s ease-in-out infinite;
+      }
+    </style>
+  </head>
+  <body
+    id="mainBody"
+    class="relative flex flex-col items-center justify-center min-h-screen p-4 sm:p-6"
+  >
+    <!-- CANVAS HIỆU ỨNG HẠT RƠI NGOÀI MÀN HÌNH -->
+    <canvas
+      id="bgCanvas"
+      class="fixed inset-0 pointer-events-none z-0"
+    ></canvas>
+
+    <!-- HỆ THỐNG ÂM THANH LOCAL -->
+    <audio id="audioBgm" loop src="nhac1.mp3"></audio>
+    <audio id="audioTyping" src="gochu.mp3"></audio>
+    <audio id="audioFlip" src="lattrang.mp3"></audio>
+
+    <!-- WIDGET BẬT/TẮT NHẠC NỀN -->
+    <div
+      class="fixed top-4 right-4 z-40 flex items-center gap-2 bg-white/85 border border-pink-300 backdrop-blur-md px-4 py-2 rounded-full shadow-md"
+    >
+      <button
+        onclick="toggleMusic()"
+        id="musicBtn"
+        class="text-pink-700 text-xs font-bold flex items-center gap-2 focus:outline-none"
+      >
+        <span id="musicIcon">🎵</span>
+        <span id="musicStatus">Bật Nhạc Nền</span>
+      </button>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-lg z-10 my-auto">
+      <!-- ================= BƯỚC 1: XÁC THỰC NGÀY / THÁNG SINH ================= -->
+      <section
+        id="stepInput"
+        class="luxe-card rounded-3xl p-7 sm:p-9 text-center transition-all duration-500 relative overflow-hidden float-anim"
+      >
+        <div
+          class="w-16 h-16 mx-auto mb-4 rounded-full bg-pink-100 border border-pink-300 flex items-center justify-center text-3xl shadow-sm"
+        >
+          🌸
+        </div>
+
+        <h1
+          class="text-2xl sm:text-3xl font-extrabold font-serif-custom pink-gold-text mb-2"
+        >
+          Z.O.L Team 20/10
+        </h1>
+        <p
+          class="text-pink-900/80 text-xs sm:text-sm mb-7 font-medium leading-relaxed"
+        >
+          Mời bạn chọn
+          <span class="text-rose-600 font-bold">Ngày & Tháng Sinh</span> để mở
+          khoá không gian ký ức ngọt ngào
+        </p>
+
+        <div class="space-y-4 mb-7 text-left">
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label
+                class="block text-xs font-bold text-pink-800 mb-2 uppercase tracking-wider"
+                >1. Chọn Ngày</label
+              >
+              <select
+                id="selectDay"
+                class="w-full bg-white/90 border border-pink-200 focus:border-rose-400 text-pink-950 rounded-2xl px-4 py-3.5 text-sm font-semibold focus:outline-none transition shadow-sm"
+              >
+                <option value="">-- Ngày --</option>
+                <script>
+                  for (let i = 1; i <= 31; i++)
+                    document.write(`<option value="${i}">Ngày ${i}</option>`);
+                </script>
+              </select>
+            </div>
+
+            <div>
+              <label
+                class="block text-xs font-bold text-pink-800 mb-2 uppercase tracking-wider"
+                >2. Chọn Tháng</label
+              >
+              <select
+                id="selectMonth"
+                class="w-full bg-white/90 border border-pink-200 focus:border-rose-400 text-pink-950 rounded-2xl px-4 py-3.5 text-sm font-semibold focus:outline-none transition shadow-sm"
+              >
+                <option value="">-- Tháng --</option>
+                <script>
+                  for (let i = 1; i <= 12; i++)
+                    document.write(`<option value="${i}">Tháng ${i}</option>`);
+                </script>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button
+          onclick="handleDecode()"
+          class="w-full sweet-btn py-4 px-6 rounded-2xl transition flex items-center justify-center gap-2 text-sm tracking-wide uppercase"
+        >
+          <span>🔓 Giải Mã Thiệp Mừng</span>
+        </button>
+      </section>
+
+      <!-- ================= BƯỚC 2: SCANNING ================= -->
+      <section
+        id="stepScanning"
+        class="hidden luxe-card rounded-3xl p-10 text-center transition-all duration-500"
+      >
+        <div
+          class="relative w-24 h-24 mx-auto mb-5 flex items-center justify-center"
+        >
+          <div
+            class="absolute inset-0 rounded-full border-2 border-rose-300 animate-ping"
+          ></div>
+          <div
+            class="absolute inset-0 rounded-full border-2 border-t-rose-500 border-r-amber-400 border-b-pink-400 border-l-transparent animate-spin"
+          ></div>
+          <span class="text-3xl">💖</span>
+        </div>
+        <h2 class="text-base font-bold text-pink-800 mb-1 tracking-wide">
+          Đang kết nối tần số yêu thương...
+        </h2>
+        <p id="scanText" class="text-xs text-pink-600 font-semibold">
+          Đang chuẩn bị phần quà Z.O.L...
+        </p>
+      </section>
+
+      <!-- ================= BƯỚC 3: THIỆP CHÍNH ================= -->
+      <section
+        id="stepResult"
+        class="hidden luxe-card rounded-3xl p-7 sm:p-9 text-center transition-all duration-500 relative overflow-hidden"
+      >
+        <div
+          class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full bg-rose-100 border border-rose-300 text-rose-700 text-xs font-bold mb-3"
+        >
+          <span id="resBadge">👑 Danh Hiệu Tôn Vinh</span>
+        </div>
+
+        <h2
+          id="resName"
+          class="text-3xl sm:text-4xl font-extrabold font-serif-custom pink-gold-text mb-4"
+        >
+          Tên Thành Viên
+        </h2>
+
+        <div
+          class="bg-white/85 rounded-2xl p-6 border border-pink-200 text-left mb-6 min-h-[160px] relative shadow-sm"
+        >
+          <p
+            id="resTypedMessage"
+            class="text-pink-950 text-base sm:text-lg font-handwriting message-content font-bold leading-relaxed"
+          ></p>
+          <span
+            id="cursor"
+            class="inline-block w-2 h-4 bg-rose-500 animate-pulse ml-1 align-middle"
+          ></span>
+        </div>
+
+        <!-- NÚT NỔI BẬT "MỞ SỔ TAY" THU HÚT ÁNH NHÌN -->
+        <div class="relative group my-2">
+          <!-- Thẻ chỉ dẫn bay nhẹ phía trên nút -->
+          <div
+            class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 bg-amber-400 text-amber-950 text-[10px] sm:text-xs font-extrabold px-3 py-0.5 rounded-full shadow-md border border-white animate-bounce whitespace-nowrap"
+          >
+            👉 Bấm vào đây để xem hành trình Z.O.L Team ✨
+          </div>
+
+          <button
+            onclick="openScrapbook()"
+            class="w-full sweet-btn cta-btn-glow py-4 px-6 rounded-2xl transition flex items-center justify-center gap-2.5 text-sm sm:text-base tracking-wide font-extrabold uppercase relative z-10 border-2 border-white/60"
+          >
+            <span class="text-xl">📖</span>
+            <span>Mở Sổ Tay Kỷ Niệm Z.O.L Team</span>
+            <span class="text-xl animate-pulse">✨</span>
+          </button>
+        </div>
+
+        <button
+          onclick="resetAll()"
+          class="mt-3 text-pink-600 hover:text-rose-800 text-xs font-semibold transition underline underline-offset-4"
+        >
+          ↻ Chọn lại ngày sinh khác
+        </button>
+      </section>
+
+      <!-- ================= FALLBACK ================= -->
+      <section
+        id="stepFallback"
+        class="hidden luxe-card rounded-3xl p-7 sm:p-9 text-center transition-all duration-500"
+      >
+        <div class="text-4xl mb-3">🍀</div>
+        <h2 class="text-lg font-bold text-pink-800 mb-2">
+          Chào mừng bạn đến với Z.O.L Team!
+        </h2>
+        <p
+          class="text-pink-900/80 text-xs sm:text-sm mb-5 leading-relaxed font-medium"
+        >
+          Hãy chọn tên của bạn trong danh sách dưới đây nhé:
+        </p>
+
+        <div id="fallbackList" class="space-y-2.5 mb-5"></div>
+
+        <button
+          onclick="resetAll()"
+          class="text-pink-600 hover:text-rose-800 text-xs font-semibold transition underline underline-offset-4"
+        >
+          ↻ Thử nhập lại Ngày / Tháng sinh
+        </button>
+      </section>
+    </main>
+
+    <!-- ================= MODAL SỔ TAY KỶ NIỆM 3D VỚI CANVAS HẠT RƠI NỘI BỘ ================= -->
+    <div
+      id="scrapbookOverlay"
+      class="fixed inset-0 bg-rose-950/40 backdrop-blur-md z-50 hidden flex items-center justify-center p-3 sm:p-4"
+    >
+      <div
+        id="journalCard"
+        class="journal-page max-w-xl w-full rounded-3xl p-5 sm:p-7 pl-8 text-left border border-pink-300 relative max-h-[92vh] flex flex-col justify-between shadow-2xl overflow-hidden z-10"
+      >
+        <!-- CANVAS TRỰC TIẾP TRONG LÒNG THẺ NHẬT KÝ -->
+        <canvas
+          id="journalCanvas"
+          class="absolute inset-0 pointer-events-none z-0"
+        ></canvas>
+
+        <!-- Header Modal -->
+        <div
+          class="flex justify-between items-center pb-3 border-b border-pink-200 relative z-10"
+        >
+          <div class="flex items-center gap-2">
+            <span class="text-2xl">📖</span>
+            <h3
+              class="text-base sm:text-lg font-bold font-serif-custom pink-gold-text"
+            >
+              Z.O.L Journal - 20/10
+            </h3>
+          </div>
+          <!-- NÚT BẤM X TẠM DỪNG TIẾN TRÌNH NHẬT KÝ -->
+          <button
+            onclick="pauseAndCloseScrapbook()"
+            class="text-pink-400 hover:text-rose-600 text-2xl font-bold transition px-2 py-1"
+          >
+            &times;
+          </button>
+        </div>
+
+        <!-- Nội Dung Trang Nhật Ký -->
+        <div
+          id="bookPageContent"
+          class="py-3 overflow-y-auto my-2 space-y-3 relative z-10"
+        ></div>
+
+        <!-- Footer Điều Hướng & Đọc Giọng Nói -->
+        <div class="pt-3 border-t border-pink-200 space-y-2.5 relative z-10">
+          <button
+            onclick="speakPageText()"
+            id="btnVoice"
+            class="w-full bg-pink-100/90 hover:bg-pink-200 border border-pink-300 text-pink-800 py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-2 transition shadow-sm"
+          >
+            <span>🎙️ Bật Giọng Đọc Truyền Cảm</span>
+          </button>
+
+          <div class="flex justify-between items-center">
+            <button
+              onclick="prevPage()"
+              id="btnPrevPage"
+              class="bg-white/90 border border-pink-200 hover:border-rose-400 text-pink-800 px-4 py-2 rounded-xl text-xs font-bold transition disabled:opacity-30"
+            >
+              ← Trang Trước
+            </button>
+            <span id="pageIndicator" class="text-xs text-rose-700 font-bold"
+              >Trang 1 / 5</span
+            >
+            <button
+              onclick="nextPage()"
+              id="btnNextPage"
+              class="sweet-btn px-4 py-2 rounded-xl text-xs font-bold transition"
+            >
+              Trang Sau →
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC TRỌN GÓI HOÀN HẢO -->
+    <script>
+      /* SETUP ĐIỀU CHỈNH ÂM LƯỢNG MẶC ĐỊNH CHUẨN CÂN BẰNG */
+      const audioBgm = document.getElementById("audioBgm");
+      const audioTyping = document.getElementById("audioTyping");
+      const audioFlip = document.getElementById("audioFlip");
+
+      if (audioBgm) audioBgm.volume = 0.25; // Nhạc nền vừa phải (25%)
+      if (audioTyping) audioTyping.volume = 0.85; // Tiếng gõ chữ to rõ (85%)
+      if (audioFlip) audioFlip.volume = 1.0; // Tiếng lật trang max (100%)
+
+      /* 1. DỮ LIỆU CÁ NHÂN HÓA 5 THÀNH VIÊN */
+      const TEAM_DATA = [
+        {
+          day: 4,
+          month: 2,
+          name: "Anh Kiệt",
+          badge: "🌟 Mảnh Ghép Tuyệt Vời – Năng Lượng Tích Cực",
+          bgGradient:
+            "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #fef3c7 100%)",
+          message:
+            "Chúc anh Kiệt có một ngày 20/10 ngập tràn niềm vui và tiếng cười! Cảm ơn anh vì luôn mang lại năng lượng tích cực, sự duyên dáng cùng tinh thần thoải mái cho cả team. Chúc anh công việc luôn hanh thông và gặt hái thêm nhiều thành công rực rỡ!",
+        },
+        {
+          day: 18,
+          month: 8,
+          name: "Chị Yến Chi",
+          badge: "🌹 Chị Đại Chu Đáo – Trụ Cột Tinh Thần Z.O.L",
+          bgGradient:
+            "linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%)",
+          message:
+            "Gửi chị Yến Chi – người chị luôn tận tụy và chu đáo của team! Chúc chị ngày 20/10 thật nhiều sức khỏe, luôn rạng rỡ, xinh đẹp và gặt hái thật nhiều thành công rực rỡ trong công việc lẫn cuộc sống.",
+        },
+        {
+          day: 20,
+          month: 5,
+          name: "Chị Ngọc Anh",
+          badge: "✨ Bóng Hồng Tinh Tế – Đồng Nghiệp Quốc Dân",
+          bgGradient:
+            "linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 50%, #fce7f3 100%)",
+          message:
+            "Chúc chị Ngọc Anh một ngày 20/10 thật trọn vẹn và ý nghĩa! Chúc chị công việc luôn thuận lợi mượt mà, deadline nhẹ nhàng và lúc nào cũng ngập tràn niềm vui, hạnh phúc mỗi ngày!",
+        },
+        {
+          day: 2,
+          month: 3,
+          name: "Chị Minh",
+          badge: "🌸 Nữ Thần Thanh Xuân – Thanh Lịch & Duyên Dáng",
+          bgGradient:
+            "linear-gradient(135deg, #fce7f3 0%, #fbcfe8 50%, #fff1f2 100%)",
+          message:
+            "Chúc chị Minh ngày 20/10 luôn tươi trẻ, tràn đầy cảm hứng sáng tạo! Chúc chị công việc luôn trôi chảy và luôn giữ trọn vẻ rạng rỡ, duyên dáng của mình nhé!",
+        },
+        {
+          day: 19,
+          month: 1,
+          name: "Trâm Anh",
+          badge: "🎀 Đồng Nghiệp Dễ Thương – Mảnh Ghép Rạng Rỡ",
+          bgGradient:
+            "linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 50%, #fce7f3 100%)",
+          message:
+            "Chúc Trâm Anh 20/10 luôn xinh đẹp, gặp thật nhiều may mắn! Chúc bạn hoàn thành tốt mọi dự án và lúc nào cũng tràn đầy nhiệt huyết, niềm vui khi đi làm nhé!",
+        },
+      ];
+
+      /* 2. DỮ LIỆU CÁC TRANG SCRAPBOOK VỚI EMOJI RƠI RIÊNG */
+      function getScrapbookPages(userName) {
+        const displayName = userName || "Bạn";
+        return [
+          {
+            title: "BÌA SỔ TAY: Z.O.L TEAM & ÁNH ĐÈN SPOTLIGHT",
+            img: "anhbia.jpg",
+            emojis: ["✨", "⭐", "💖", "🌸"],
+            text: "GỬI NHỮNG MẢNH GHÉP RỰC RỠ CỦA Z.O.L TEAM!\n\nĐể có một bài diễn tròn trịa trên sân khấu, điều quan trọng nhất không chỉ là kỹ thuật, mà là sự ăn ý và tinh thần trách nhiệm của từng người. Mỗi lần bước lên ánh đèn là một lần chúng ta nhìn nhau, giữ đúng nhịp đập và cùng tạo nên một tổng thể hài hòa nhất.\n\nZ.O.L Team được tạo nên từ những con người có thể rất khác nhau trong đời thường, nhưng lại cực kỳ gắn kết khi đứng chung trong một đội hình. Nhân ngày 20/10, trang nhật ký này được mở ra như một khoảng dừng nhẹ nhàng để nhìn lại hành trình chúng ta đã cùng nhau bước qua.",
+          },
+          {
+            title: "TRANG 1: GIÁ TRỊ TẠO NÊN TỪ HẬU TRƯỜNG",
+            img: "anhpt.jpg",
+            emojis: ["🍀", "💖", "🌸", "✨"],
+            text: "Một tiết mục đẹp mắt chưa bao giờ đến từ sự ngẫu nhiên, mà là kết quả của rất nhiều khoảnh khắc phía sau màn nhung:\n\n- Những buổi tập miệt mài: Cùng nhau đếm từng nhịp nhạc, sửa từng góc mặt, góc tay để cả đội hình đạt được sự đồng điệu cao nhất.\n- Sự thấu hiểu trên sàn diễn: Chỉ cần một ánh mắt hay một nhịp chuyển, mọi người đều tự giác hỗ trợ lẫn nhau để bài diễn trôi chảy mượt mà.\n- Sự chăm chút sau hậu trường: Những nụ cười giải tỏa áp lực, sự chuẩn bị chu đáo trước giờ lên sóng chính là chất keo gắn kết bền chặt nhất của team.",
+          },
+          {
+            title: "TRANG 2: ÁNH ĐÈN SÂN KHẤU VÀ KHOẢNH KHẤC THĂNG HOA",
+            isGallery: true,
+            emojis: ["🌹", "✨", "🔥", "💖"],
+            galleryImgs: [
+              "anhsk1.jpg",
+              "anhsk2.jpg",
+              "anhsk3.jpg",
+              "anhsk4.jpg",
+            ],
+            text: "Khi giai điệu bắt đầu vang lên và ánh đèn sân khấu chiếu rọi, mọi sự chuẩn bị tỉ mỉ đều biến thành năng lượng bùng nổ! Mỗi ánh mắt, mỗi bước di chuyển trên sân khấu không chỉ thể hiện đam mê, mà còn là lời khẳng định cho tinh thần tập thể bản lĩnh và rực rỡ của Z.O.L Team!",
+          },
+          {
+            title: `TRANG 3: MẢNH GHÉP KHÔNG THỂ THIẾU – CẢM ƠN ${displayName.toUpperCase()}!`,
+            img: "anhsk1.jpg",
+            emojis: ["💞", "🎀", "🌸", "💖"],
+            text: `Gửi ${displayName},\n\nSự đồng hành và tinh thần trách nhiệm của ${displayName} luôn là một phần rất quan trọng trong sự vận hành của Z.O.L Team. Cảm ơn ${displayName} vì đã luôn tập trung, tỉ mỉ và cống hiến hết mình trong từng buổi tập cũng như khi bước ra trước khán giả.\n\nSự điềm tĩnh, rạng rỡ và nét duyên dáng riêng của ${displayName} không chỉ giúp đội hình thêm trọn vẹn, mà còn mang lại năng lượng rất dễ chịu cho tất cả mọi người xung quanh.\n\nTrân trọng chúc ${displayName} một ngày 20/10 thật nhiều niềm vui, luôn giữ vững sự tự tin, công việc hanh thông và luôn hạnh phúc trên chặng đường phía trước!`,
+          },
+          {
+            title: "TRANG 4: CÙNG NHÌN VỀ MỘT HÀNH TRÌNH RỰC RỠ HƠN",
+            img: "anhket.jpg",
+            emojis: ["🎉", "🎈", "💖", "✨", "🌸"],
+            isFinalPage: true,
+            text: `Xin gửi lời cảm ơn và trân trọng nhất đến tất cả các thành viên của Z.O.L Team! Cảm ơn mọi người vì đã chọn gắn bó, chọn chia sẻ và cùng nhau tạo nên những dấu ấn đẹp.\n\nChúc ${displayName} một ngày Phụ Nữ Việt Nam 20/10 (cũng như mọi ngày trong năm) thật trọn vẹn, luôn tươi trẻ, tràn đầy năng lượng, gặp nhiều may mắn và đạt được những mục tiêu mình mong muốn!\n\nHy vọng trong những chặng đường sắp tới, Z.O.L Team vẫn sẽ luôn giữ vững tinh thần gắn kết này để tiếp tục tạo ra những kỷ niệm tuyệt vời hơn nữa.\n\nHAPPY VIETNAMESE WOMEN'S DAY 20/10! 🌹✨`,
+          },
+        ];
+      }
+
+      let currentUser = null;
+      let currentPageIndex = 0;
+      let isAudioPlaying = false;
+      let isTransitioning = false;
+      let currentEmojis = ["💖", "🍀", "✨", "🌸"];
+
+      /* LƯU TRẠNG THÁI GÕ CHỮ ĐỂ TẠM DỪNG / TIẾP TỤC THÔNG MINH */
+      let typeState = {
+        timer: null,
+        words: [],
+        index: 0,
+        targetElId: "",
+        isPaused: false,
+        onComplete: null,
+      };
+
+      function hideAllSteps() {
+        document.getElementById("stepInput").classList.add("hidden");
+        document.getElementById("stepScanning").classList.add("hidden");
+        document.getElementById("stepResult").classList.add("hidden");
+        document.getElementById("stepFallback").classList.add("hidden");
+      }
+
+      /* 3. GIẢI MÃ NGÀY SINH */
+      function handleDecode() {
+        const day = parseInt(document.getElementById("selectDay").value);
+        const month = parseInt(document.getElementById("selectMonth").value);
+
+        if (!day || !month) {
+          alert("Vui lòng chọn đầy đủ cả Ngày và Tháng sinh nhé!");
+          return;
+        }
+
+        hideAllSteps();
+        document.getElementById("stepScanning").classList.remove("hidden");
+
+        const scanText = document.getElementById("scanText");
+        setTimeout(() => {
+          scanText.innerText = "Đang kiểm tra tần số ngọt ngào...";
+        }, 700);
+        setTimeout(() => {
+          scanText.innerText = "Xác thực tín hiệu thành công!";
+        }, 1500);
+
+        setTimeout(() => {
+          const found = TEAM_DATA.find(
+            (item) => item.day === day && item.month === month,
+          );
+          if (found) {
+            showResult(found);
+          } else {
+            showFallback();
+          }
+        }, 2200);
+      }
+
+      function showResult(user) {
+        currentUser = user;
+        hideAllSteps();
+        document.getElementById("stepResult").classList.remove("hidden");
+
+        document.getElementById("resBadge").innerText = user.badge;
+        document.getElementById("resName").innerText = user.name;
+
+        if (user.bgGradient)
+          document.getElementById("mainBody").style.background =
+            user.bgGradient;
+
+        fireConfetti();
+        typeWriterWordByWord(user.message, "resTypedMessage");
+      }
+
+      /* THUẬT TOÁN GÕ CHỮ CÓ CHỨC NĂNG PAUSE, RESUME VÀ TỰ ĐỘNG CUỘN TRANG */
+      function typeWriterWordByWord(
+        text,
+        targetElId,
+        onComplete,
+        resumeFromPause = false,
+      ) {
+        const el = document.getElementById(targetElId);
+        const cursor = document.getElementById("cursor");
+        const scrollContainer = document.getElementById("bookPageContent");
+
+        if (!resumeFromPause) {
+          if (typeState.timer) clearTimeout(typeState.timer);
+          el.innerHTML = "";
+          typeState.words = text.split(" ");
+          typeState.index = 0;
+          typeState.targetElId = targetElId;
+          typeState.isPaused = false;
+          typeState.onComplete = onComplete;
+        } else {
+          typeState.isPaused = false;
+        }
+
+        if (cursor) cursor.style.display = "inline-block";
+
+        function typeStep() {
+          if (typeState.isPaused) return;
+
+          if (typeState.index < typeState.words.length) {
+            el.innerHTML +=
+              (typeState.index === 0 ? "" : " ") +
+              typeState.words[typeState.index];
+            typeState.index++;
+
+            try {
+              if (audioTyping) {
+                audioTyping.currentTime = 0;
+                audioTyping.play().catch(() => {});
+              }
+            } catch (e) {}
+
+            // TỰ ĐỘNG LƯỚT XUỐNG DƯỚI KHI CHỮ ĐANG GÕ Bị TRÀN KHUNG
+            if (scrollContainer && targetElId === "pageTypedText") {
+              scrollContainer.scrollTo({
+                top: scrollContainer.scrollHeight,
+                behavior: "smooth",
+              });
+            }
+
+            typeState.timer = setTimeout(typeStep, 32);
+          } else {
+            if (cursor) cursor.style.display = "none";
+            if (typeState.onComplete) typeState.onComplete();
+          }
+        }
+        typeStep();
+      }
+
+      function showFallback() {
+        hideAllSteps();
+        const fallbackSec = document.getElementById("stepFallback");
+        const listContainer = document.getElementById("fallbackList");
+        fallbackSec.classList.remove("hidden");
+
+        listContainer.innerHTML = "";
+        TEAM_DATA.forEach((user) => {
+          const btn = document.createElement("button");
+          btn.className =
+            "w-full bg-white/90 hover:bg-pink-100 border border-pink-200 text-pink-900 py-3 px-4 rounded-2xl text-xs font-bold transition text-left flex justify-between items-center shadow-sm";
+          btn.innerHTML = `<span>🌸 ${user.name}</span> <span class="text-rose-600 text-xs font-bold">Xem thiệp ngay →</span>`;
+          btn.onclick = () => showResult(user);
+          listContainer.appendChild(btn);
+        });
+      }
+
+      /* 4. MỞ KHÓA SỔ TAY / TẠM DỪNG TIẾN TRÌNH KHI BẤM [X] */
+      function openScrapbook() {
+        if (!isAudioPlaying) toggleMusic();
+
+        document.getElementById("scrapbookOverlay").classList.remove("hidden");
+
+        if (typeState.isPaused && typeState.targetElId === "pageTypedText") {
+          typeWriterWordByWord("", "pageTypedText", typeState.onComplete, true);
+        } else {
+          renderPage();
+        }
+      }
+
+      function pauseAndCloseScrapbook() {
+        typeState.isPaused = true;
+        if (typeState.timer) clearTimeout(typeState.timer);
+
+        window.speechSynthesis.cancel();
+        if (audioBgm) audioBgm.volume = 0.25;
+
+        document.getElementById("scrapbookOverlay").classList.add("hidden");
+      }
+
+      function renderPage() {
+        window.speechSynthesis.cancel();
+        const userName = currentUser ? currentUser.name : "Bạn";
+        const pages = getScrapbookPages(userName);
+        const page = pages[currentPageIndex];
+        const contentEl = document.getElementById("bookPageContent");
+
+        if (page.emojis) {
+          currentEmojis = page.emojis;
+          resetJournalParticles();
+        }
+
+        let mediaHtml = "";
+        if (page.isGallery) {
+          mediaHtml = `
+                    <div class="grid grid-cols-2 gap-2.5 my-2">
+                        ${page.galleryImgs
+                          .map(
+                            (img) => `
+                            <div class="polaroid-frame relative">
+                                <div class="tape-effect"></div>
+                                <img src="${img}" alt="Sân khấu" class="w-full h-24 sm:h-28 object-cover rounded" onerror="this.src='https://via.placeholder.com/300x200?text=San+Khau'"/>
+                            </div>
+                        `,
+                          )
+                          .join("")}
+                    </div>
+                `;
+        } else if (page.img) {
+          mediaHtml = `
+                    <div class="my-2 flex justify-center">
+                        <div class="polaroid-frame relative max-w-xs w-full">
+                            <div class="tape-effect"></div>
+                            <img src="${page.img}" alt="Kỷ niệm" class="w-full h-36 sm:h-44 object-cover rounded" onerror="this.src='https://via.placeholder.com/400x300?text=ZOL+Team'"/>
+                        </div>
+                    </div>
+                `;
+        }
+
+        contentEl.innerHTML = `
+                <h4 class="text-xs sm:text-sm font-bold text-pink-800 border-b border-pink-200 pb-1.5">${page.title}</h4>
+                ${mediaHtml}
+                <div class="bg-white/90 p-4 rounded-2xl border border-pink-200 shadow-sm relative z-10">
+                    <p id="pageTypedText" class="text-pink-950 text-sm sm:text-base font-handwriting message-content leading-relaxed font-bold"></p>
+                </div>
+                ${
+                  page.isFinalPage
+                    ? `
+                    <div class="text-center pt-2">
+                        <button onclick="fireConfetti()" class="sweet-btn text-xs font-bold py-2.5 px-5 rounded-xl">
+                            ✨ Bắn Pháo Hoa Mừng Z.O.L Team
+                        </button>
+                    </div>
+                `
+                    : ""
+                }
+            `;
+
+        document.getElementById("pageIndicator").innerText =
+          `Trang ${currentPageIndex + 1} / ${pages.length}`;
+        document.getElementById("btnPrevPage").disabled =
+          currentPageIndex === 0;
+
+        const nextBtn = document.getElementById("btnNextPage");
+        if (currentPageIndex === pages.length - 1) {
+          nextBtn.innerText = "Hoàn Thành ✓";
+          nextBtn.onclick = pauseAndCloseScrapbook;
+        } else {
+          nextBtn.innerText = "Trang Sau →";
+          nextBtn.onclick = nextPage;
+        }
+
+        typeWriterWordByWord(page.text, "pageTypedText", () => {
+          if (page.isFinalPage) {
+            fireConfetti();
+          }
+        });
+      }
+
+      function changePageWithTransition(targetIndex) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+
+        const journalCard = document.getElementById("journalCard");
+
+        try {
+          if (audioFlip) {
+            audioFlip.currentTime = 0;
+            audioFlip.play().catch(() => {});
+          }
+        } catch (e) {}
+
+        journalCard.classList.add("page-flipping");
+
+        setTimeout(() => {
+          currentPageIndex = targetIndex;
+          renderPage();
+          journalCard.classList.remove("page-flipping");
+          isTransitioning = false;
+        }, 600);
+      }
+
+      function nextPage() {
+        const pages = getScrapbookPages(currentUser ? currentUser.name : "");
+        if (currentPageIndex < pages.length - 1 && !isTransitioning) {
+          changePageWithTransition(currentPageIndex + 1);
+        }
+      }
+
+      function prevPage() {
+        if (currentPageIndex > 0 && !isTransitioning) {
+          changePageWithTransition(currentPageIndex - 1);
+        }
+      }
+
+      /* 5. GIỌNG ĐỌC API + AUDIO DUCKING SIÊU NHỎ NHẠC NỀN */
+      function speakPageText() {
+        if (!("speechSynthesis" in window)) {
+          alert("Trình duyệt không hỗ trợ đọc tự động!");
+          return;
+        }
+
+        window.speechSynthesis.cancel();
+        const userName = currentUser ? currentUser.name : "";
+        const pages = getScrapbookPages(userName);
+        const textToSpeak = pages[currentPageIndex].text;
+
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = "vi-VN";
+        utterance.rate = 0.9;
+
+        utterance.onstart = () => {
+          if (audioBgm) audioBgm.volume = 0.08;
+        };
+        utterance.onend = () => {
+          if (audioBgm) audioBgm.volume = 0.25;
+        };
+        utterance.onerror = () => {
+          if (audioBgm) audioBgm.volume = 0.25;
+        };
+
+        window.speechSynthesis.speak(utterance);
+      }
+
+      function resetAll() {
+        currentUser = null;
+        document.getElementById("selectDay").value = "";
+        document.getElementById("selectMonth").value = "";
+        document.getElementById("mainBody").style.background = "";
+        hideAllSteps();
+        document.getElementById("stepInput").classList.remove("hidden");
+      }
+
+      function fireConfetti() {
+        if (typeof confetti === "function") {
+          confetti({
+            particleCount: 150,
+            spread: 100,
+            origin: { y: 0.6 },
+            colors: ["#f43f5e", "#fb7185", "#f59e0b", "#a855f7", "#34d399"],
+          });
+        }
+      }
+
+      function toggleMusic() {
+        const status = document.getElementById("musicStatus");
+        const icon = document.getElementById("musicIcon");
+
+        if (audioBgm.paused) {
+          audioBgm
+            .play()
+            .then(() => {
+              isAudioPlaying = true;
+              status.innerText = "Đang Phát Nhạc";
+              icon.classList.add("animate-spin");
+            })
+            .catch((e) => {});
+        } else {
+          audioBgm.pause();
+          isAudioPlaying = false;
+          status.innerText = "Bật Nhạc Nền";
+          icon.classList.remove("animate-spin");
+        }
+      }
+
+      /* 6. CANVAS HẠT RƠI TRONG LÒNG THẺ NHẬT KÝ (JOURNAL CANVAS) */
+      const jCanvas = document.getElementById("journalCanvas");
+      const jCtx = jCanvas.getContext("2d");
+      let jParticles = [];
+
+      function resizeJournalCanvas() {
+        const card = document.getElementById("journalCard");
+        if (card) {
+          jCanvas.width = card.clientWidth;
+          jCanvas.height = card.clientHeight;
+        }
+      }
+      window.addEventListener("resize", resizeJournalCanvas);
+
+      class JournalParticle {
+        constructor() {
+          this.reset();
+        }
+        reset() {
+          this.x = Math.random() * (jCanvas.width || 300);
+          this.y = Math.random() * (jCanvas.height || 400);
+          this.size = Math.random() * 10 + 10;
+          this.speedY = Math.random() * 0.7 + 0.3;
+          this.speedX = Math.random() * 0.4 - 0.2;
+          this.emoji =
+            currentEmojis[Math.floor(Math.random() * currentEmojis.length)];
+          this.rotation = Math.random() * 360;
+          this.rotSpeed = Math.random() * 0.02 - 0.01;
+          this.opacity = Math.random() * 0.5 + 0.25;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          this.rotation += this.rotSpeed;
+
+          if (this.y > jCanvas.height + 20) {
+            this.y = -20;
+            this.x = Math.random() * jCanvas.width;
+            this.emoji =
+              currentEmojis[Math.floor(Math.random() * currentEmojis.length)];
+          }
+        }
+        draw() {
+          jCtx.save();
+          jCtx.translate(this.x, this.y);
+          jCtx.rotate(this.rotation);
+          jCtx.globalAlpha = this.opacity;
+          jCtx.font = `${this.size}px sans-serif`;
+          jCtx.fillText(this.emoji, 0, 0);
+          jCtx.restore();
+        }
+      }
+
+      function resetJournalParticles() {
+        resizeJournalCanvas();
+        jParticles = [];
+        for (let i = 0; i < 22; i++) jParticles.push(new JournalParticle());
+      }
+
+      function animateJournalCanvas() {
+        jCtx.clearRect(0, 0, jCanvas.width, jCanvas.height);
+        jParticles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateJournalCanvas);
+      }
+
+      /* 7. CANVAS HẠT RƠI NGOÀI NỀN TRANG WEB (BACKGROUND CANVAS) */
+      const bgCanvas = document.getElementById("bgCanvas");
+      const bgCtx = bgCanvas.getContext("2d");
+      let bgParticles = [];
+
+      function resizeBgCanvas() {
+        bgCanvas.width = window.innerWidth;
+        bgCanvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeBgCanvas);
+      resizeBgCanvas();
+
+      class BgParticle {
+        constructor() {
+          this.x = Math.random() * bgCanvas.width;
+          this.y = Math.random() * bgCanvas.height;
+          this.size = Math.random() * 12 + 12;
+          this.speedY = Math.random() * 0.6 + 0.2;
+          this.speedX = Math.random() * 0.4 - 0.2;
+          this.emoji = ["🌸", "✨", "💖", "🍀"][Math.floor(Math.random() * 4)];
+          this.opacity = Math.random() * 0.4 + 0.2;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          if (this.y > bgCanvas.height + 20) {
+            this.y = -20;
+            this.x = Math.random() * bgCanvas.width;
+          }
+        }
+        draw() {
+          bgCtx.save();
+          bgCtx.globalAlpha = this.opacity;
+          bgCtx.font = `${this.size}px sans-serif`;
+          bgCtx.fillText(this.emoji, this.x, this.y);
+          bgCtx.restore();
+        }
+      }
+
+      for (let i = 0; i < 25; i++) bgParticles.push(new BgParticle());
+
+      function animateBgCanvas() {
+        bgCtx.clearRect(0, 0, bgCanvas.width, bgCanvas.height);
+        bgParticles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animateBgCanvas);
+      }
+
+      // Khởi động các vòng lặp hoạt họa
+      animateBgCanvas();
+      animateJournalCanvas();
+      setTimeout(resizeJournalCanvas, 300);
+    </script>
+  </body>
+</html>
