@@ -38,7 +38,6 @@
         font-family: "Dancing Script", cursive;
       }
 
-      /* Thẻ Kính Mờ Pastel */
       .luxe-card {
         background: rgba(255, 255, 255, 0.75);
         backdrop-filter: blur(20px);
@@ -49,7 +48,6 @@
           inset 0 1px 0 rgba(255, 255, 255, 0.9);
       }
 
-      /* Trang Nhật Ký Có Gáy Sổ Lò Xò */
       .journal-page {
         background: rgba(255, 250, 245, 0.98);
         border: 2px solid rgba(244, 114, 182, 0.35);
@@ -72,13 +70,11 @@
         z-index: 10;
       }
 
-      /* Lật trang 3D */
       .page-flipping {
         transform: rotateY(-90deg) scale(0.95);
         opacity: 0;
       }
 
-      /* Khung Dán Ảnh Polaroid Scrapbook */
       .polaroid-frame {
         background: #ffffff;
         padding: 10px 10px 24px 10px;
@@ -133,7 +129,6 @@
         background: linear-gradient(135deg, #e11d48 0%, #f43f5e 100%);
       }
 
-      /* Nút Mở Sổ Tỏa Sáng Thu Hút */
       @keyframes glowPulse {
         0%,
         100% {
@@ -187,6 +182,44 @@
     id="mainBody"
     class="relative flex flex-col items-center justify-center min-h-screen p-4 sm:p-6"
   >
+    <!-- KHUNG CẢNH BÁO MỞ TRÌNH DUYỆT NGOÀI DÀNH RIÊNG CHO ZALO -->
+    <div
+      id="zaloNotice"
+      class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-[100] flex flex-col items-center justify-start pt-12 p-6 text-center text-white"
+    >
+      <div class="text-right w-full pr-4 mb-2 animate-bounce">
+        <span class="text-3xl">↗️</span>
+      </div>
+      <div
+        class="bg-rose-900/90 border-2 border-amber-400 p-6 rounded-3xl max-w-sm shadow-2xl"
+      >
+        <div class="text-4xl mb-3">⚠️</div>
+        <h3 class="text-lg font-bold text-amber-300 mb-2">
+          Trình duyệt Zalo bị hạn chế âm thanh!
+        </h3>
+        <p class="text-xs text-rose-100 leading-relaxed mb-4">
+          Để trải nghiệm trọn vẹn
+          <span class="text-amber-300 font-bold"
+            >nhạc nền, hiệu ứng lật trang 3D & giọng đọc</span
+          >, bạn hãy:
+        </p>
+        <div
+          class="bg-black/40 p-3 rounded-xl text-left text-xs space-y-2 mb-5 border border-white/20"
+        >
+          <p>1️⃣ Bấm vào **dấu 3 chấm (...)** góc trên cùng bên phải.</p>
+          <p>2️⃣ Chọn **"Mở bằng trình duyệt"** (Chrome / Safari).</p>
+        </div>
+        <button
+          onclick="
+            document.getElementById('zaloNotice').classList.add('hidden')
+          "
+          class="w-full bg-amber-400 hover:bg-amber-300 text-rose-950 font-bold py-3 rounded-xl text-xs uppercase tracking-wider"
+        >
+          Vẫn xem tiếp trên Zalo
+        </button>
+      </div>
+    </div>
+
     <!-- CANVAS HIỆU ỨNG HẠT RƠI NGOÀI MÀN HÌNH -->
     <canvas
       id="bgCanvas"
@@ -339,9 +372,7 @@
           ></span>
         </div>
 
-        <!-- NÚT NỔI BẬT "MỞ SỔ TAY" THU HÚT ÁNH NHÌN -->
         <div class="relative group my-2">
-          <!-- Thẻ chỉ dẫn bay nhẹ phía trên nút -->
           <div
             class="absolute -top-3.5 left-1/2 -translate-x-1/2 z-20 bg-amber-400 text-amber-950 text-[10px] sm:text-xs font-extrabold px-3 py-0.5 rounded-full shadow-md border border-white animate-bounce whitespace-nowrap"
           >
@@ -401,13 +432,11 @@
         id="journalCard"
         class="journal-page max-w-xl w-full rounded-3xl p-5 sm:p-7 pl-8 text-left border border-pink-300 relative max-h-[92vh] flex flex-col justify-between shadow-2xl overflow-hidden z-10"
       >
-        <!-- CANVAS TRỰC TIẾP TRONG LÒNG THẺ NHẬT KÝ -->
         <canvas
           id="journalCanvas"
           class="absolute inset-0 pointer-events-none z-0"
         ></canvas>
 
-        <!-- Header Modal -->
         <div
           class="flex justify-between items-center pb-3 border-b border-pink-200 relative z-10"
         >
@@ -419,7 +448,6 @@
               Z.O.L Journal - 20/10
             </h3>
           </div>
-          <!-- NÚT BẤM X TẠM DỪNG TIẾN TRÌNH NHẬT KÝ -->
           <button
             onclick="pauseAndCloseScrapbook()"
             class="text-pink-400 hover:text-rose-600 text-2xl font-bold transition px-2 py-1"
@@ -428,13 +456,11 @@
           </button>
         </div>
 
-        <!-- Nội Dung Trang Nhật Ký -->
         <div
           id="bookPageContent"
           class="py-3 overflow-y-auto my-2 space-y-3 relative z-10"
         ></div>
 
-        <!-- Footer Điều Hướng & Đọc Giọng Nói -->
         <div class="pt-3 border-t border-pink-200 space-y-2.5 relative z-10">
           <button
             onclick="speakPageText()"
@@ -467,18 +493,22 @@
       </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC TRỌN GÓI HOÀN HẢO -->
+    <!-- JAVASCRIPT LOGIC DÀNH CHO ZALO & TRÌNH DUYỆT CÁC MÁY -->
     <script>
-      /* SETUP ĐIỀU CHỈNH ÂM LƯỢNG MẶC ĐỊNH CHUẨN CÂN BẰNG */
+      /* PHÁT HIỆN LÀ ZALO -> HIỆN BẢNG NHẮC CHUYỂN TRÌNH DUYỆT */
+      const isZalo = /Zalo/i.test(navigator.userAgent);
+      if (isZalo) {
+        document.getElementById("zaloNotice").classList.remove("hidden");
+      }
+
       const audioBgm = document.getElementById("audioBgm");
       const audioTyping = document.getElementById("audioTyping");
       const audioFlip = document.getElementById("audioFlip");
 
-      if (audioBgm) audioBgm.volume = 0.25; // Nhạc nền vừa phải (25%)
-      if (audioTyping) audioTyping.volume = 0.85; // Tiếng gõ chữ to rõ (85%)
-      if (audioFlip) audioFlip.volume = 1.0; // Tiếng lật trang max (100%)
+      if (audioBgm) audioBgm.volume = 0.25;
+      if (audioTyping) audioTyping.volume = 0.85;
+      if (audioFlip) audioFlip.volume = 1.0;
 
-      /* 1. DỮ LIỆU CÁ NHÂN HÓA 5 THÀNH VIÊN */
       const TEAM_DATA = [
         {
           day: 4,
@@ -532,7 +562,6 @@
         },
       ];
 
-      /* 2. DỮ LIỆU CÁC TRANG SCRAPBOOK VỚI EMOJI RƠI RIÊNG */
       function getScrapbookPages(userName) {
         const displayName = userName || "Bạn";
         return [
@@ -582,7 +611,6 @@
       let isTransitioning = false;
       let currentEmojis = ["💖", "🍀", "✨", "🌸"];
 
-      /* LƯU TRẠNG THÁI GÕ CHỮ ĐỂ TẠM DỪNG / TIẾP TỤC THÔNG MINH */
       let typeState = {
         timer: null,
         words: [],
@@ -599,7 +627,6 @@
         document.getElementById("stepFallback").classList.add("hidden");
       }
 
-      /* 3. GIẢI MÃ NGÀY SINH */
       function handleDecode() {
         const day = parseInt(document.getElementById("selectDay").value);
         const month = parseInt(document.getElementById("selectMonth").value);
@@ -648,7 +675,7 @@
         typeWriterWordByWord(user.message, "resTypedMessage");
       }
 
-      /* THUẬT TOÁN GÕ CHỮ CÓ CHỨC NĂNG PAUSE, RESUME VÀ TỰ ĐỘNG CUỘN TRANG */
+      /* AN TOÀN CHO ZALO CHỐNG TREO BỞI ÂM THANH */
       function typeWriterWordByWord(
         text,
         targetElId,
@@ -682,6 +709,7 @@
               typeState.words[typeState.index];
             typeState.index++;
 
+            // Phát tiếng gõ phím bọc trong Try-Catch an toàn
             try {
               if (audioTyping) {
                 audioTyping.currentTime = 0;
@@ -689,7 +717,6 @@
               }
             } catch (e) {}
 
-            // TỰ ĐỘNG LƯỚT XUỐNG DƯỚI KHI CHỮ ĐANG GÕ Bị TRÀN KHUNG
             if (scrollContainer && targetElId === "pageTypedText") {
               scrollContainer.scrollTo({
                 top: scrollContainer.scrollHeight,
@@ -723,7 +750,6 @@
         });
       }
 
-      /* 4. MỞ KHÓA SỔ TAY / TẠM DỪNG TIẾN TRÌNH KHI BẤM [X] */
       function openScrapbook() {
         if (!isAudioPlaying) toggleMusic();
 
@@ -740,14 +766,18 @@
         typeState.isPaused = true;
         if (typeState.timer) clearTimeout(typeState.timer);
 
-        window.speechSynthesis.cancel();
+        try {
+          window.speechSynthesis.cancel();
+        } catch (e) {}
         if (audioBgm) audioBgm.volume = 0.25;
 
         document.getElementById("scrapbookOverlay").classList.add("hidden");
       }
 
       function renderPage() {
-        window.speechSynthesis.cancel();
+        try {
+          window.speechSynthesis.cancel();
+        } catch (e) {}
         const userName = currentUser ? currentUser.name : "Bạn";
         const pages = getScrapbookPages(userName);
         const page = pages[currentPageIndex];
@@ -861,33 +891,41 @@
         }
       }
 
-      /* 5. GIỌNG ĐỌC API + AUDIO DUCKING SIÊU NHỎ NHẠC NỀN */
+      /* TỐI ƯU HÀM ĐỌC GIỌNG AI BỌC TRY-CATCH CHO ZALO */
       function speakPageText() {
         if (!("speechSynthesis" in window)) {
-          alert("Trình duyệt không hỗ trợ đọc tự động!");
+          alert(
+            "Trình duyệt Zalo đang chặn tính năng giọng đọc! Bạn hãy mở bằng Chrome/Safari nhé!",
+          );
           return;
         }
 
-        window.speechSynthesis.cancel();
-        const userName = currentUser ? currentUser.name : "";
-        const pages = getScrapbookPages(userName);
-        const textToSpeak = pages[currentPageIndex].text;
+        try {
+          window.speechSynthesis.cancel();
+          const userName = currentUser ? currentUser.name : "";
+          const pages = getScrapbookPages(userName);
+          const textToSpeak = pages[currentPageIndex].text;
 
-        const utterance = new SpeechSynthesisUtterance(textToSpeak);
-        utterance.lang = "vi-VN";
-        utterance.rate = 0.9;
+          const utterance = new SpeechSynthesisUtterance(textToSpeak);
+          utterance.lang = "vi-VN";
+          utterance.rate = 0.9;
 
-        utterance.onstart = () => {
-          if (audioBgm) audioBgm.volume = 0.08;
-        };
-        utterance.onend = () => {
-          if (audioBgm) audioBgm.volume = 0.25;
-        };
-        utterance.onerror = () => {
-          if (audioBgm) audioBgm.volume = 0.25;
-        };
+          utterance.onstart = () => {
+            if (audioBgm) audioBgm.volume = 0.08;
+          };
+          utterance.onend = () => {
+            if (audioBgm) audioBgm.volume = 0.25;
+          };
+          utterance.onerror = () => {
+            if (audioBgm) audioBgm.volume = 0.25;
+          };
 
-        window.speechSynthesis.speak(utterance);
+          window.speechSynthesis.speak(utterance);
+        } catch (e) {
+          alert(
+            "Hãy mở bằng Chrome/Safari để nghe được giọng đọc mượt nhất nhé!",
+          );
+        }
       }
 
       function resetAll() {
@@ -922,7 +960,9 @@
               status.innerText = "Đang Phát Nhạc";
               icon.classList.add("animate-spin");
             })
-            .catch((e) => {});
+            .catch((e) => {
+              console.log("Audio play blocked by browser");
+            });
         } else {
           audioBgm.pause();
           isAudioPlaying = false;
@@ -931,7 +971,7 @@
         }
       }
 
-      /* 6. CANVAS HẠT RƠI TRONG LÒNG THẺ NHẬT KÝ (JOURNAL CANVAS) */
+      /* CANVAS HẠT RƠI IN-CARD */
       const jCanvas = document.getElementById("journalCanvas");
       const jCtx = jCanvas.getContext("2d");
       let jParticles = [];
@@ -999,7 +1039,7 @@
         requestAnimationFrame(animateJournalCanvas);
       }
 
-      /* 7. CANVAS HẠT RƠI NGOÀI NỀN TRANG WEB (BACKGROUND CANVAS) */
+      /* CANVAS HẠT RƠI BACKGROUND */
       const bgCanvas = document.getElementById("bgCanvas");
       const bgCtx = bgCanvas.getContext("2d");
       let bgParticles = [];
@@ -1049,7 +1089,6 @@
         requestAnimationFrame(animateBgCanvas);
       }
 
-      // Khởi động các vòng lặp hoạt họa
       animateBgCanvas();
       animateJournalCanvas();
       setTimeout(resizeJournalCanvas, 300);
